@@ -49,7 +49,6 @@ class PatentDescDataset(Dataset):
     def __init__(self, split='train',
                  desc_type='detailed',
                  ocr_only=False,
-                 ocr_file=None,
                  data_dir=None,
                  data_len=-1):
 
@@ -62,15 +61,14 @@ class PatentDescDataset(Dataset):
         with open(os.path.join(split_files_loc, f'{split}.txt')) as f:
             self.fnames = set([x.strip() for x in f.readlines()])
         
-        # truncated descriptions
-        with open(os.path.join(data_dir, 'truncated_descriptions.json')) as f:
-            self.descriptions = {k: v[desc_type].strip() for k,v in json.load(f).items() if v[desc_type].strip()!=''}
+        with open(os.path.join(data_dir, 'PatentDesc-355k.json')) as f:
+            self.descriptions = {k: v[desc_type+'_description'].strip() for k,v in json.load(f).items() if v[desc_type+'_description'].strip()!=''}
         
         self.fnames = list(self.fnames.intersection(set(self.descriptions.keys())))
         
-        self.img_dir = os.path.join(data_dir, 'images_combined')
+        self.img_dir = os.path.join(data_dir, 'images')
 
-        with open(ocr_file, 'r') as f:
+        with open(os.path.join(data_dir, 'ocr.json'), 'r') as f:
             self.ocr = json.load(f)
 
         self.num_samples = len(self.fnames) if data_len == -1 else data_len
@@ -104,7 +102,7 @@ class PatentDescDataset(Dataset):
             'ocr_attention_mask': torch.tensor(ocr_attention_mask),
             'ocr_bboxes': torch.tensor(ocr_bboxes),
             'description': self.descriptions[fig_id],
-	    'image_id': fig_id
+	        'image_id': fig_id
         }
 
         if not self.ocr_only:
