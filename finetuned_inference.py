@@ -19,7 +19,7 @@ class ModelArguments:
     tune_mm_mlp_adapter: bool = field(default=False)
     vision_tower: Optional[str] = field(default='microsoft/layoutlmv3-large')
     mm_vision_select_layer: Optional[int] = field(default=-2)
-    pretrain_mm_mlp_adapter: Optional[str] = field(default='/storage/PatentQA/mlm_mim_pch_hupd_llama/checkpoints/tna=False_PCH=True-v1.5-7b-pretrain_brief/checkpoint-1000/mm_projector.bin')
+    pretrain_mm_mlp_adapter: Optional[str] = field(default=None)
     mm_projector_type: Optional[str] = field(default='mlp2x_gelu')
     mm_use_im_start_end: bool = field(default=False)
     mm_use_im_patch_token: bool = field(default=False)
@@ -41,7 +41,7 @@ def tokenizer_image_token(prompt, tokenizer, image_token_index=-200, return_tens
         input_ids.extend(x[offset:])
 
     ##### change here for detailed description
-    # line62:  return torch.tensor(input_ids, dtype=torch.long)
+    # line47:  return torch.tensor(input_ids, dtype=torch.long)
     if return_tensors is not None:
         if return_tensors == 'pt':
             return torch.tensor(input_ids[:1024], dtype=torch.long)
@@ -67,16 +67,16 @@ def find_all_linear_names(model):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch_size", type=int, default=2, help="Batch size for processing (default: 4)")
-    parser.add_argument("--data_dir", type=str, default='../gen_data/DATASET')
-    parser.add_argument("--ocr_file", type=str, default='../gen_data/DATASET/LayoutLM_ocr/combined_ocr.json')
-    parser.add_argument("--path_to_ckp", type=str, default='/storage/PatentQA/mlm_mim_pch_hupd_llama/checkpoints/TBA=False_PCH=True-v1.5-7b_brief/checkpoint-13400/global_step13400/mp_rank_00_model_states.pt')
+    parser.add_argument("--path_to_ckp", type=str, required=True, help="Path to global_step/mp_rank_00_model_states.pt from checkpoint")
+    parser.add_argument("--data_dir", type=str, required=True)
+    parser.add_argument("--desc_type", type=str, required=True)
+    parser.add_argument("--output_file", type=str, required=True)
 
     args = parser.parse_args()
 
-    test_ds = PatentDescDataset('test', desc_type='brief', ocr_file = args.ocr_file, data_dir=args.data_dir, data_len=-1)
+    test_ds = PatentDescDataset('test', desc_type=args.desc_type, data_dir=args.data_dir, data_len=-1)
 
-    test_dl = DataLoader(test_ds, batch_size=args.batch_size,
-                          shuffle=True, num_workers=0, pin_memory=True, collate_fn=custom_collate)
+    test_dl = DataLoader(test_ds, batch_size=args.batch_size, shuffle=True, num_workers=0, pin_memory=True, collate_fn=custom_collate)
                 
     tokenizer = AutoTokenizer.from_pretrained("liuhaotian/llava-v1.5-7b", fast=False)
     
@@ -111,36 +111,26 @@ if __name__ == '__main__':
     model.config.tokenizer_padding_side = 'right'
     model.config.tokenizer_model_max_length = 2048
 
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     model.load_state_dict(torch.load(args.path_to_ckp)['module'])
-
-    breakpoint()
-    processor = vision_tower.processor
-
-
-    model = model.to('cuda')
-    
+    model = model.to(device)
     model.eval()
 
-    prompt = "<image>\nUSER: Write a brief description for this patent image.\nASSISTANT:"
+    processor = vision_tower.processor
+
+    prompt = f"<image>\nUSER: Write a {args.desc_type} description for this patent image.\nASSISTANT:"
 
     generated_descriptions = {}
-    #inference loop
+    
     for batch in tqdm.tqdm(test_dl):
         inputs = processor(batch['img'], return_tensors='pt')
-        # inputs.pop('input_ids')
-        # inputs.pop('attention_mask')
-
-
-        # inputs.update(tokenizer(text=[prompt]*args.batch_size, return_tensors='pt', max_length=512, truncation=True, padding='longest'))
-        # inputs = {k: v.to('cuda', dtype=torch.bfloat16) for k,v in inputs.items()}
-        inputs['images'] = inputs.pop('pixel_values').to('cuda')
-        # inputs.pop('attention_mask')
-        inputs['input_ids'] = torch.stack([tokenizer_image_token(p, tokenizer, return_tensors='pt') for p in [prompt]*args.batch_size], dim=0).to('cuda')
-
-        inputs['ocr_input_ids'] = batch['ocr_input_ids'].to('cuda')
-        inputs['ocr_attention_mask'] = batch['ocr_attention_mask'].to('cuda')
-        inputs['ocr_bboxes'] = batch['ocr_bboxes'].to('cuda')
-
+        
+        inputs['images'] = inputs.pop('pixel_values').to(device)
+        inputs['input_ids'] = torch.stack([tokenizer_image_token(p, tokenizer, return_tensors='pt') for p in [prompt]*args.batch_size], dim=0).to(device)
+        inputs['ocr_input_ids'] = batch['ocr_input_ids'].to(device)
+        inputs['ocr_attention_mask'] = batch['ocr_attention_mask'].to(device)
+        inputs['ocr_bboxes'] = batch['ocr_bboxes'].to(device)
 
         description_ids = model.generate(**inputs, max_length=512)
         description_ids[description_ids == -200] = 1
@@ -150,5 +140,5 @@ if __name__ == '__main__':
         for i in range(len(batch['fig_id'])):
             generated_descriptions[batch['fig_id'][i]] = description_text[i].split('image.\nASSISTANT:')[-1]
 
-        with open("output/no_ocr-brief.json", "w") as outfile:
+        with open(args.output_file, "w") as outfile:
             json.dump(generated_descriptions, outfile, indent=2)
