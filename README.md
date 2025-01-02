@@ -64,12 +64,12 @@ Follow the steps below to download the dataset in appropriate format:
     mkdir images
     cd images
     ```
-    Download the images from given `image_url` in the json.
+    Download the images using the given `image_url` from the json file. Please follow the naming convention of `image_id.png` for saving the images.
     ```
     cd ..
     ```
 
-4.  Download and upload text files listing image_ids corresponding to train, val and test splits from [here](https://drive.google.com/drive/folders/12LXLU2lJtFdw4yev0E7MJnK1Suk-FL9U?usp=sharing).
+4.  Download the text files listing image_ids corresponding to train, val and test splits from [here](https://drive.google.com/drive/folders/12LXLU2lJtFdw4yev0E7MJnK1Suk-FL9U?usp=sharing).
 
 5.  We utilize the LayoutLMv3 preprocessor which uses off-the-shelf Tesseract OCR engine, to extract OCR text from patent images. For convenience, we provide the json file with extracted OCR [here]().
 
