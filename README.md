@@ -3,11 +3,18 @@ Official Implementation of the PatentLMM: Large Multimodal Model for Generating 
 
 [Paper]() | [Project Page](https://vl2g.github.io/projects/PatentLMM/)
 
-## Setting up the Environment
-The `patentlmm.yml` provides a conda environment to run inference and experiments with PatentLMM. To install and setup the environment, please run:
+## Setting up the repo
 
+1. Clone the repo
+```
+git clone https://github.com/vl2g/PatentLMM/
+cd PatentLMM
+```
+
+2. Install the environment
 ```
 conda env create -f patentlmm.yml
+pip3 install -e .
 ```
 
 Next, please run `pip install -e .` from the root of this repo to install this folder as python package.
@@ -16,9 +23,9 @@ Next, please run `pip install -e .` from the root of this repo to install this f
 
 The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
 
-| **PatentMME**                                  | **PatentLMM**                                   
-|------------------------------------------------------|-------------------------------------------------------
-| [Download](https://example.com/patentmme-large)      |  [Download](https://example.com/patentlmm-large)       
+| **PatentMME**| **PatentLMM-brief** | **PatentLMM-detailed** 
+|------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
+| [Download](https://example.com/patentmme-large)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)
 
 
 ### Data
