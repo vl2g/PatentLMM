@@ -57,7 +57,7 @@ Follow the steps below to download the dataset in appropriate format:
     cd DATASET
     ```
 
-2.  Download and upload [PatentDesc-355k.json](https://drive.google.com/file/d/1PqLxhrqLa6m4_CwD_S0dvvTZDQJZdKY_/view?usp=drive_link)
+2.  Download [PatentDesc-355k.json](https://drive.google.com/file/d/1PqLxhrqLa6m4_CwD_S0dvvTZDQJZdKY_/view?usp=drive_link)
 
 3.  
     ```
