@@ -1,5 +1,7 @@
 # PatentLMM
-Official Implementation of our AAAI 2025 Paper
+Official Implementation of the PatentLMM: Large Multimodal Model for Generating Descriptions for Patent Figures (AAAI 2025) Paper
+
+[Paper]() | [Project Page](https://vl2g.github.io/projects/PatentLMM/)
 
 ## Setting up the Environment
 The `patentlmm.yml` provides a conda environment to run inference and experiments with PatentLMM. To install and setup the environment, please run:
@@ -10,15 +12,13 @@ conda env create -f patentlmm.yml
 
 Next, please run `pip install -e .` from the root of this repo to install this folder as python package.
 
-## Downloading Checkpoints and Data
+### Download Checkpoints
 
-### Checkpoints
-The pre-trained checkpoints for PatentMME and PatentLMM are listed below:
+The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
 
-| **Pre-training Objectives for PatentMME**                  | **Download (PatentMME)**                                  | **Download (PatentLMM)**                                   
-|----------------------------------------------------|------------------------------------------------------|-------------------------------------------------------
-| Masked LM + Layout-Aware MIM                | [Download](https://example.com/patentmme-base)       | [Download](https://example.com/patentlmm-base)        
-|  Masked LM + Layout-Aware MIM + Patch Classification                      | [Download](https://example.com/patentmme-large)      |  [Download](https://example.com/patentlmm-large)       
+| **PatentMME**                                  | **PatentLMM**                                   
+|------------------------------------------------------|-------------------------------------------------------
+| [Download](https://example.com/patentmme-large)      |  [Download](https://example.com/patentlmm-large)       
 
 
 ### Data
