@@ -5,8 +5,8 @@ deepspeed  --master_port=29503 llava/train/train_mem.py \
     --deepspeed ./scripts/zero2.json \
     --model_name_or_path "liuhaotian/llava-v1.5-7b" \
     --version plain \
-    --data_path /scratch/data/mishra_rs/PatentQA/gen_data/DATASET/llava_json/brief_train \
-    --image_folder /scratch/data/mishra_rs/PatentQA/gen_data/DATASET/images_combined \
+    --data_path DATASET/llava_json/brief_train \
+    --image_folder DATASET/images \
     --vision_tower patentmme \
     --mm_projector_type mlp2x_gelu \
     --tune_mm_mlp_adapter True \
@@ -14,7 +14,7 @@ deepspeed  --master_port=29503 llava/train/train_mem.py \
     --mm_use_im_start_end False \
     --mm_use_im_patch_token False \
     --bf16 True \
-    --output_dir /scratch/data/mishra_rs/PatentQA/checkpoints/mlm_mim_pch_hupd_llama/tna=False_PCH=True-v1.5-7b-pretrain_brief \
+    --output_dir checkpoints/mlm_mim_pch_hupd_llama/pretrain_brief \
     --num_train_epochs 1 \
     --per_device_train_batch_size 12 \
     --per_device_eval_batch_size 12 \
@@ -33,4 +33,4 @@ deepspeed  --master_port=29503 llava/train/train_mem.py \
     --gradient_checkpointing True \
     --dataloader_num_workers 4 \
     --lazy_preprocess True \
-    --report_to none  2>&1 | tee mlm_mim_pch_hupd_llama_adapter_brief_9Jul.log
+    --report_to none  2>&1 | tee mlm_mim_pch_hupd_llama.log
