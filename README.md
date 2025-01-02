@@ -100,7 +100,7 @@ Finally, the `DATASET` directory should have the following structure:
 The pre-trained checkpoints for PatentMME, PatentLMM and PatentLLaMA are provided below:
 
 | **PatentMME**| **PatentLMM-brief** | **PatentLMM-detailed** | **PatentLLaMA**
-|------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
+|------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
 | [Download](https://drive.google.com/drive/folders/1n0kriDeXjnbw9hNVJ1FgdMogt5yHcD35?usp=sharing)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)    |    [Download](https://example.com/patentllama)
 
 Download and unzip the respective checkpoints in a `checkpoints` directory.
