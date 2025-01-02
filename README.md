@@ -23,7 +23,7 @@ The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
 
 | **PatentMME**| **PatentLMM-brief** | **PatentLMM-detailed** 
 |------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
-| [Download](https://example.com/patentmme-large)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)
+| [Download](https://drive.google.com/drive/folders/1n0kriDeXjnbw9hNVJ1FgdMogt5yHcD35?usp=sharing)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)
 
 
 ## Downloading and preparing data
