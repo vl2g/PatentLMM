@@ -25,6 +25,10 @@ The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
 |------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
 | [Download](https://drive.google.com/drive/folders/1n0kriDeXjnbw9hNVJ1FgdMogt5yHcD35?usp=sharing)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)
 
+PatentLLaMA checkpoint can be downloaded from [here]()
+
+The PatentMME checkpoint should be put under `checkpoints/patentmme/mlm_lamim_pc/` location and the HUPDLLaMA checkpoint should be put under `checkpoints/hupd_llama/` for training PatentLMM.
+
 
 ## Downloading and preparing data
 The PatentDesc-355k dataset is provided [here](https://drive.google.com/file/d/1PqLxhrqLa6m4_CwD_S0dvvTZDQJZdKY_/view?usp=drive_link) as a json file with `image_ids` as keys, and its internet URL and corresponding brief and detailed description here. Below is an example showing data format.
@@ -105,6 +109,14 @@ Finally, the `DATASET` directory should have the following structure:
 ```
 
 ## Training PatentLMM
+We follow two-stage strategy to train PatentLMM. To train the projector layer in stage-1, run:
+```
+bash scripts/v1_5/train_patentlmm_stage1.sh
+```
+To train for stage-2:
+```
+bash scripts/v1_5/train_patentlmm_stage2.sh
+```
 
 
 ## Acknowledgements
