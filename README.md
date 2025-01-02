@@ -17,19 +17,6 @@ conda env create -f patentlmm.yml
 pip3 install -e .
 ```
 
-## Download Checkpoints
-
-The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
-
-| **PatentMME**| **PatentLMM-brief** | **PatentLMM-detailed** 
-|------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
-| [Download](https://drive.google.com/drive/folders/1n0kriDeXjnbw9hNVJ1FgdMogt5yHcD35?usp=sharing)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)
-
-PatentLLaMA checkpoint can be downloaded from [here]()
-
-The PatentMME checkpoint should be put under `checkpoints/patentmme/mlm_lamim_pc/` location and the HUPDLLaMA checkpoint should be put under `checkpoints/hupd_llama/` for training PatentLMM.
-
-
 ## Downloading and preparing data
 The PatentDesc-355k dataset is provided [here](https://drive.google.com/file/d/1PqLxhrqLa6m4_CwD_S0dvvTZDQJZdKY_/view?usp=drive_link) as a json file with `image_ids` as keys, and its internet URL and corresponding brief and detailed description here. Below is an example showing data format.
 
@@ -108,6 +95,16 @@ Finally, the `DATASET` directory should have the following structure:
     . 
 ```
 
+## Downloading Checkpoints
+
+The pre-trained checkpoints for PatentMME, PatentLMM and PatentLLaMA are provided below:
+
+| **PatentMME**| **PatentLMM-brief** | **PatentLMM-detailed** | **PatentLLaMA**
+|------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
+| [Download](https://drive.google.com/drive/folders/1n0kriDeXjnbw9hNVJ1FgdMogt5yHcD35?usp=sharing)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)    |    [Download](https://example.com/patentllama)
+
+Download and unzip the respective checkpoints in a `checkpoints` directory.
+
 ## Training PatentLMM
 We follow two-stage strategy to train PatentLMM. To train the projector layer in stage-1, run:
 ```
@@ -121,4 +118,4 @@ bash scripts/v1_5/train_patentlmm_stage2.sh
 
 ## Acknowledgements
 - This work was supported by the Microsoft Academic Partnership Grant (MAPG) 2023.
-- We heavily re-utilize the code from the [LLaVA repository](https://github.com/haotian-liu/LLaVA) for our experiments and would like to thank the authors for open-sourcing it!
+- We would like to thank the authors of [LLaVA](https://github.com/haotian-liu/LLaVA), [LayoutLMv3]() and [OCR-VQGAN]() for open-sourcing their code and checkpoints!
