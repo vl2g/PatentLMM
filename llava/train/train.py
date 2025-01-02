@@ -955,7 +955,7 @@ def train():
 
     ### Load HUPD LLaMA 
     previous_state_dict = model.state_dict()
-    with safe_open("/storage/PatentQA/mlm_mim_hupd_llama/llama_ckpt/adapter_model.safetensors", framework="pt", device=0) as f:
+    with safe_open("checkpoints/hupd_llama/adapter_model.safetensors", framework="pt", device=0) as f:
         for key in f.keys():
             previous_state_dict[key[:-7]+'.default'+key[-7:]] = f.get_tensor(key)
     
