@@ -8,7 +8,6 @@ from torch.nn.utils.rnn import pad_sequence
 
 def custom_collate(batch):
     desc = [b.pop('description') for b in batch]
-    # ocr_text = [b.pop('ocr_text') for b in batch]
     ocr_input_ids = [b.pop('ocr_input_ids') for b in batch]
     ocr_attention_mask = [b.pop('ocr_attention_mask') for b in batch]
     ocr_bboxes = [b.pop('ocr_bboxes') for b in batch]
@@ -22,7 +21,6 @@ def custom_collate(batch):
     collated_batch = dataloader.default_collate(batch)
 
     collated_batch['description'] = desc
-    # collated_batch['ocr_text'] = ocr_text
     collated_batch['ocr_input_ids'] = ocr_input_ids
     collated_batch['ocr_attention_mask'] = ocr_attention_mask
     collated_batch['ocr_bboxes'] = ocr_bboxes
@@ -51,8 +49,8 @@ class PatentDescDataset(Dataset):
     def __init__(self, split='train',
                  desc_type='detailed',
                  ocr_only=False,
-                 ocr_file='../gen_data/DATASET/LayoutLM_ocr/combined_ocr.json',
-                 data_dir='../gen_data/DATASET',
+                 ocr_file=None,
+                 data_dir=None,
                  data_len=-1):
 
         assert split in ['train', 'val', 'test'], RuntimeError(f"Invalid dataset split {split}")
@@ -74,8 +72,6 @@ class PatentDescDataset(Dataset):
 
         with open(ocr_file, 'r') as f:
             self.ocr = json.load(f)
-        # self.ocr_dir = os.path.join(data_dir, 'ocr_combined')
-        # self.desc_dir = os.path.join(data_dir, 'desc_ocr_combined')
 
         self.num_samples = len(self.fnames) if data_len == -1 else data_len
 
@@ -92,11 +88,7 @@ class PatentDescDataset(Dataset):
         img = None
         if not self.ocr_only:
             img = Image.open(os.path.join(self.img_dir, f'{fig_id}.png')).convert('RGB')
-            # img = self.im_transform(img)
-
-        # with open(os.path.join(self.ocr_dir, f'{fig_id}.json')) as f:
-        #     ocr_text = '. '.join(json.load(f)['text'])
-            
+		
         ocr_input_ids = self.ocr[fig_id+'.png']['input_ids'][0]
         ocr_attention_mask = self.ocr[fig_id+'.png']['attention_mask'][0]
         ocr_bboxes = self.ocr[fig_id+'.png']['bbox'][0]
@@ -105,9 +97,6 @@ class PatentDescDataset(Dataset):
             ocr_input_ids = ocr_input_ids[:511] + [ocr_input_ids[-1]]
             ocr_attention_mask = ocr_attention_mask[:511] + [ocr_attention_mask[-1]]
             ocr_bboxes = ocr_bboxes[:511] + [ocr_bboxes[-1]]
-        
-        # with open(os.path.join(self.desc_dir, f'{fig_id}.json')) as f:
-        #     description = json.load(f)
         
         res = {
             'fig_id': fig_id,
