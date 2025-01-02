@@ -17,7 +17,7 @@ conda env create -f patentlmm.yml
 pip3 install -e .
 ```
 
-### Download Checkpoints
+## Download Checkpoints
 
 The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
 
@@ -26,17 +26,83 @@ The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
 | [Download](https://example.com/patentmme-large)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)
 
 
-### Data
-We provide data in three parts:
-- A json file with `image_ids` as keys, and its internet URL and corresponding brief and detailed description here. As mentioned in the paper, the descriptions in this file are clipped at 500 tokens. This should be used to download the images and for any custom pre-processing.
-- A processed json file to work with llava-like framework. This is primarily used for training our model, along with the images downloaded using earlier json file.
-- Three text files detailing the split of data into train, validation and test sets.
+## Downloading and preparing data
+The PatentDesc-355k dataset is provided [here](https://drive.google.com/file/d/1PqLxhrqLa6m4_CwD_S0dvvTZDQJZdKY_/view?usp=drive_link) as a json file with `image_ids` as keys, and its internet URL and corresponding brief and detailed description here. Below is an example showing data format.
 
-The download links are given below:
-Compiled Data with URLs: []
-LLaVA-compitable training files: []
-Splits files: []
+```
+{
+    "US11036663B2__2": {
+        "image_url": "...",
+        "brief_description": "...",
+        "detailed_description": "..."
+    },
+    "US11336511B2__54": {
+        "image_url": "...",
+        "brief_description": "...",
+        "detailed_description": "..."
+    },
+    .
+    .
+    .
+}
+```
 
+As mentioned in the paper, the detailed descriptions in this file are clipped at 500 tokens.
+
+Follow the steps below to download the dataset in appropriate format:
+
+1.  
+    ```
+    mkdir DATASET
+    cd DATASET
+    ```
+
+2.  Download and upload [PatentDesc-355k.json](https://drive.google.com/file/d/1PqLxhrqLa6m4_CwD_S0dvvTZDQJZdKY_/view?usp=drive_link)
+
+3.  
+    ```
+    mkdir images
+    cd images
+    ```
+    Download the images from given `image_url` in the json.
+    ```
+    cd ..
+    ```
+
+4.  Download and upload text files listing image_ids corresponding to train, val and test splits from [here](https://drive.google.com/drive/folders/12LXLU2lJtFdw4yev0E7MJnK1Suk-FL9U?usp=sharing).
+
+5.  We utilize the LayoutLMv3 preprocessor which uses off-the-shelf Tesseract OCR engine, to extract OCR text from patent images. For convenience, we provide the json file with extracted OCR [here]().
+
+6.  Run the following command to create data in LLaVA format for training/validation.
+    ```
+    mkdir llava_json
+    cd ..
+    python prep_patent_data.py --desc_type [brief/detailed] --split [train/val] --data_dir [path to DATASET directory]
+    ```
+
+Finally, the `DATASET` directory should have the following structure:
+```
+│DATASET│
+│
+├── PatentDesc-355k.json
+├── ocr.json
+├── data_splits
+│   ├── all.txt
+│   ├── train.txt
+│   ├── val.txt
+│   └── test.txt
+├── llava_json
+│   ├── brief_train
+│   ├── brief_val
+│   ├── detailed_train
+│   └── detailed_val
+└── images
+    ├── US11036663B2__2.png
+    ├── US11336511B2__54.png
+    .
+    .
+    . 
+```
 
 ## Training PatentLMM
 
