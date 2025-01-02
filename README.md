@@ -17,8 +17,6 @@ conda env create -f patentlmm.yml
 pip3 install -e .
 ```
 
-Next, please run `pip install -e .` from the root of this repo to install this folder as python package.
-
 ### Download Checkpoints
 
 The pre-trained checkpoints for PatentMME and PatentLMM are provided below:
