@@ -106,7 +106,7 @@ The pre-trained checkpoints for PatentMME, PatentLMM and PatentLLaMA are provide
 Download and unzip the respective checkpoints in a `checkpoints` directory.
 
 ## Training PatentLMM
-We follow two-stage strategy to train PatentLMM. To train the projector layer in stage-1, run:
+We follow two-stage strategy to train PatentLMM. To train the projection layer in stage-1, run:
 ```
 bash scripts/v1_5/train_patentlmm_stage1.sh
 ```
@@ -115,7 +115,26 @@ To train for stage-2:
 bash scripts/v1_5/train_patentlmm_stage2.sh
 ```
 
+## Inference
+To see the inference results with our trained model, run the command below:
+```
+python finetuned_inference.py --path_to_ckp [path to global_step/mp_rank_00_model_states.pt from checkpoint] --data_dir [path to DATASET directory] --desc_type [brief/detailed] --output_file [json file name where to save results]
+```
+
+## Cite us
+- If you find this work useful for your research, please consider citing.
+```
+@inproceedings{shukla2025patentlmm,
+  author    = "Shukla, Shreya and 
+              Sharma, Nakul and 
+              Gupta, Manish and
+              Mishra, Anand",
+  title     = "PatentLMM: Large Multimodal Model for Generating Descriptions for Patent Figures",
+  booktitle = "AAAI",
+  year      = "2025",
+}
+```
 
 ## Acknowledgements
 - This work was supported by the Microsoft Academic Partnership Grant (MAPG) 2023.
-- We would like to thank the authors of [LLaVA](https://github.com/haotian-liu/LLaVA), [LayoutLMv3]() and [OCR-VQGAN]() for open-sourcing their code and checkpoints!
+- We would like to thank the authors of [LLaVA](https://github.com/haotian-liu/LLaVA), [LayoutLMv3](https://github.com/microsoft/unilm/tree/master/layoutlmv3) and [OCR-VQGAN](https://github.com/joanrod/ocr-vqgan) for open-sourcing their code and checkpoints!
