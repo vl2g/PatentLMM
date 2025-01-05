@@ -2,6 +2,7 @@ from dataset import PatentDescDataset
 import json
 from tqdm import tqdm
 import argparse
+import os
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
