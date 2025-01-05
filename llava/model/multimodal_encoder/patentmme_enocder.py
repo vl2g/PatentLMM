@@ -35,7 +35,7 @@ class PatentMMETower(nn.Module):
         self.vision_tower = LayoutLMv3Model.from_pretrained("microsoft/layoutlmv3-large", config=self.cfg_only, ignore_mismatched_sizes=True)
 
         ###
-        sd = torch.load('checkpoints/patentmme/mlm_lamim_pc/last.ckpt', map_location='cpu')['state_dict']
+        sd = torch.load('checkpoints/PatentMME/last.ckpt', map_location='cpu')['state_dict']
         sd = {k.replace('model.', ''): v for k, v in sd.items()}
         self.vision_tower.load_state_dict(sd, strict=False)
         ###
