@@ -636,7 +636,7 @@ class LazySupervisedDataset(Dataset):
     def __init__(self, data_path: str,
                  tokenizer: transformers.PreTrainedTokenizer,
                  data_args: DataArguments,
-                 ocr_file='/scratch/data/mishra_rs/PatentQA/gen_data/DATASET/LayoutLM_ocr/combined_ocr.json'):
+                 ocr_file='DATASET/ocr.json'):
         super(LazySupervisedDataset, self).__init__()
         list_data_dict = json.load(open(data_path, "r"))
 
