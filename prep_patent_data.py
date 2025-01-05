@@ -13,7 +13,7 @@ if __name__ == '__main__':
     print(f"Preparing {args.desc_type} descriptions for {args.split} split")
     llava_dataset = []
 
-    data = PatentDescDataset(split=args.split, desc_type=args.desc_type, data_dir=args.data_dir)
+    data = PatentDescDataset(split=args.split, desc_type=args.desc_type, data_dir=args.data_dir, ocr_only=True)
 
     spcl_tokens = ["<image>", "<im_patch>", "<im_start>", "<im_end>", "<image-placeholder>", "<", ">"]
     reps = {x: x.replace('<', '[[').replace('>', ']]') for x in spcl_tokens}
