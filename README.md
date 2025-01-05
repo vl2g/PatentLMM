@@ -14,6 +14,7 @@ cd PatentLMM
 2. Install the environment
 ```
 conda env create -f patentlmm.yml
+conda activate patentlmm
 pip3 install -e .
 ```
 
