@@ -78,7 +78,7 @@ Finally, the `DATASET` directory should have the following structure:
 │
 ├── PatentDesc-355k.json
 ├── ocr.json
-├── data_splits
+├── splits
 │   ├── all.txt
 │   ├── train.txt
 │   ├── val.txt
