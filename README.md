@@ -16,6 +16,12 @@ cd PatentLMM
 conda env create -f patentlmm.yml
 conda activate patentlmm
 pip3 install -e .
+
+# install flash-attention
+wget https://github.com/Dao-AILab/flash-attention/releases/download/v2.6.3/flash_attn-2.6.3+cu118torch2.0cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+pip3 install flash_attn-2.6.3+cu118torch2.0cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+# remove the wheel
+rm flash_attn-2.6.3+cu118torch2.0cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 ```
 
 ## Downloading and preparing data
