@@ -108,7 +108,7 @@ The pre-trained checkpoints for PatentMME, PatentLMM and PatentLLaMA are provide
 
 | **PatentMME**| **PatentLMM-brief** | **PatentLMM-detailed** | **PatentLLaMA**
 |------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
-| [Download](https://drive.google.com/drive/folders/1n0kriDeXjnbw9hNVJ1FgdMogt5yHcD35?usp=sharing)      |  [Download](https://example.com/patentlmm-large)      | [Download](https://example.com/patentlmm-large)    |    [Download](https://example.com/patentllama)
+| [Download](https://drive.google.com/drive/folders/1n0kriDeXjnbw9hNVJ1FgdMogt5yHcD35?usp=sharing)      |  [Download](https://iitjacin-my.sharepoint.com/:u:/g/personal/sharma_86_iitj_ac_in/EVvEZo5ZufZMvS5F4-ocb5kBqACwzW6tX-5neCmPbSDldA?e=OhEBCf)      | [Download](https://iitjacin-my.sharepoint.com/:u:/g/personal/sharma_86_iitj_ac_in/ESQTJyqKUqREquQOnFuxSXsBJB0kI3KsCrRpI9tJAsEUaA?e=PlwYbo)    |    [Download](https://example.com/patentllama)
 
 Download and unzip the respective checkpoints in a `checkpoints` directory.
 
