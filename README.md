@@ -1,7 +1,7 @@
 # PatentLMM: Large Multimodal Model for Generating Descriptions for Patent Figures
 Official Implementation of the PatentLMM: Large Multimodal Model for Generating Descriptions for Patent Figures (AAAI 2025) Paper
 
-[Paper]() | [Project Page](https://vl2g.github.io/projects/PatentLMM/)
+[Paper](https://arxiv.org/pdf/2501.15074) | [Project Page](https://vl2g.github.io/projects/PatentLMM/)
 
 ## Setting up the repo
 
