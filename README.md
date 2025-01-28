@@ -108,7 +108,7 @@ The pre-trained checkpoints for PatentMME, PatentLMM and PatentLLaMA are provide
 
 | **PatentMME**| **PatentLMM-brief** | **PatentLMM-detailed** | **PatentLLaMA**
 |------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------
-| [Download](https://drive.google.com/file/d/1U1BA0h43pJR2ZuHz975YKjdTLhWz1oPA/view?usp=drive_link)      |  [Download](https://iitjacin-my.sharepoint.com/:u:/g/personal/sharma_86_iitj_ac_in/EVvEZo5ZufZMvS5F4-ocb5kBqACwzW6tX-5neCmPbSDldA?e=OhEBCf)      | [Download](https://iitjacin-my.sharepoint.com/:u:/g/personal/sharma_86_iitj_ac_in/ESQTJyqKUqREquQOnFuxSXsBJB0kI3KsCrRpI9tJAsEUaA?e=PlwYbo)    |    [Download](https://drive.google.com/file/d/19N4kRcpqp8runxqNq3runK3Uc9zjKuzh/view?usp=sharing)
+| [Download](https://drive.google.com/file/d/1U1BA0h43pJR2ZuHz975YKjdTLhWz1oPA/view?usp=drive_link)      |  [Download](https://iitjacin-my.sharepoint.com/:u:/g/personal/sharma_86_iitj_ac_in/EVvEZo5ZufZMvS5F4-ocb5kBqACwzW6tX-5neCmPbSDldA?e=OhEBCf)      | [Download](https://iitjacin-my.sharepoint.com/:u:/g/personal/sharma_86_iitj_ac_in/ESQTJyqKUqREquQOnFuxSXsBnvBW1jQ7qmsVtuDqicNQaA?e=KXn12t)    |    [Download](https://drive.google.com/file/d/19N4kRcpqp8runxqNq3runK3Uc9zjKuzh/view?usp=sharing)
 
 Download and unzip the respective checkpoints in a `checkpoints` directory.
 
