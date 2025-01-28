@@ -69,7 +69,7 @@ Follow the steps below to download the dataset in appropriate format:
 
 4.  Download the text files listing image_ids corresponding to train, val and test splits from [here](https://drive.google.com/drive/folders/12LXLU2lJtFdw4yev0E7MJnK1Suk-FL9U?usp=sharing).
 
-5.  We utilize the LayoutLMv3 preprocessor which uses off-the-shelf Tesseract OCR engine, to extract OCR text from patent images. For convenience, we provide the json file with extracted OCR [here]().
+5.  We utilize the LayoutLMv3 processor which uses off-the-shelf Tesseract OCR engine, to extract OCR text from patent images. For convenience, we provide the json file with extracted OCR [here](https://drive.google.com/file/d/1Au4icS3Y_CPpWczHkEcUcKwQd90KCeKl/view?usp=sharing).
 
 6.  Run the following command to create data in LLaVA format for training/validation.
     ```
